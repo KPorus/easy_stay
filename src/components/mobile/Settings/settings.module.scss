@@ -1,0 +1,70 @@
+.settingContainer {
+  width: 88%;
+  padding: 3%;
+  margin: auto;
+
+  @media (max-width:1032px) {
+    width: 78%;
+  }
+
+  @media (max-width:950px) {
+    width: 68%;
+  }
+
+  .settingBody {
+    .settingBodyPartOne {
+      @apply flex flex-col;
+      gap: 1rem;
+
+      .inputBody {
+        min-width: 50%;
+      }
+
+      .chooseImage {
+        .placeholderBox {
+          width: 200px;
+          height: 200px;
+          border: 2px dashed #ccc;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 10px;
+          color: #888;
+        }
+
+        .previewImage {
+          width: 200px;
+          height: 200px;
+          object-fit: cover;
+          margin-bottom: 10px;
+        }
+
+        .chooseImageLabel {
+          margin-bottom: 5px;
+          font-weight: bold;
+        }
+      }
+
+
+    }
+
+    .settingBodyPartTwo {
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #6b6a6a;
+        border-radius: 4px;
+        resize: vertical;
+        outline: none;
+        color: #0d9fb6;
+
+        &:focus {
+          border: 4px solid #088395;
+        }
+      }
+    }
+
+  }
+
+
+}

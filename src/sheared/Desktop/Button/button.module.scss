@@ -1,0 +1,35 @@
+.btnContainer {
+    @apply block text-center rounded-full cursor-pointer;
+    padding: 10px 0px;
+    font-size: 13px;
+    
+}
+
+.primary {
+    color: #1C1C1C;
+    font-size: 18px;
+    font-weight: 700;
+    background-color: #37B7C3;
+    padding: 6.5px 50px;
+    border-radius: 2rem; 
+     -webkit-border-radius: 32px; 
+    -moz-border-radius: 32px;
+    -ms-border-radius: 32px;
+    -o-border-radius: 32px;
+}
+
+.secondary {
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.thrid {
+    margin: auto;
+    width: 30%;
+    margin-top: 2rem;
+    background-color: #071952;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+}

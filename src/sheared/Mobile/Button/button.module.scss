@@ -1,0 +1,16 @@
+.btnContainer {
+    @apply block text-center rounded-full cursor-pointer;
+    padding: 10px 0px;
+    font-size: 13px;
+    
+}
+
+.primary {
+    margin: auto;
+    width: 60%;
+    margin-top: 2rem;
+    background-color: #071952;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+}

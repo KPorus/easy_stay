@@ -1,0 +1,33 @@
+.loginContainer {
+    color: rgb(133, 131, 131);
+    background-color: #071952;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    .loginTitle {
+        @apply mb-4 text-2xl font-bold;
+        color: #37B7C3;
+    }
+
+    .formContainer {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 26.25rem;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .loginMain{
+        @apply flex md-desktop:flex-col items-center; 
+        width: 57.6rem;
+    }
+}

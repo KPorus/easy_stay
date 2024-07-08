@@ -1,0 +1,24 @@
+    .loginTitle {
+        @apply mb-4 text-2xl font-bold;
+        color: #37B7C3;
+    }
+
+    .formContainer {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 20.25rem;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .loginMain {
+        @apply flex flex-col items-center;
+    }

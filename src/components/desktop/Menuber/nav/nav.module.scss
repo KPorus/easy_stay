@@ -1,0 +1,25 @@
+.menuListContainer {
+  position: absolute;
+  top: 0;
+
+  .navLogo {
+    filter: drop-shadow(30px 10px 4px #071952);
+    -webkit-filter: drop-shadow(3px 4px 0px #071952);
+  }
+
+  .menuListBody {
+    position: relative;
+    line-height: 60px;
+    color: white;
+    font-size: 1.5625rem;
+    top: 98px;
+    left: 68px;
+
+    @media (max-width: 1045px) {
+      left: 58px;
+    }
+    @media (max-width: 950px) {
+      left: 48px;
+    }
+  }
+}
