@@ -2,7 +2,7 @@
     @apply block text-center rounded-full cursor-pointer;
     padding: 10px 0px;
     font-size: 13px;
-    
+
 }
 
 .primary {
@@ -11,8 +11,8 @@
     font-weight: 700;
     background-color: #37B7C3;
     padding: 6.5px 50px;
-    border-radius: 2rem; 
-     -webkit-border-radius: 32px; 
+    border-radius: 2rem;
+    -webkit-border-radius: 32px;
     -moz-border-radius: 32px;
     -ms-border-radius: 32px;
     -o-border-radius: 32px;
@@ -32,4 +32,26 @@
     color: #ffffff;
     font-size: 18px;
     font-weight: 700;
+}
+
+.fourth {
+    padding: 8px;
+    background-color: #910b0b;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.fifth{
+    padding: 8px;
+    background-color: #e6e4e4;
+    color: #071952;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }

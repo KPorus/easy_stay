@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
-const lato = Lato({ subsets: ["latin"], weight: ["400", "700","900"] });
+import { Toaster } from "react-hot-toast";
+const lato = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
 export const metadata: Metadata = {
   title: "Easy stay --[admins platform]",
@@ -15,7 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body id="body" className={lato.className}>{children}</body>
+      <body id="body" className={lato.className}>
+        {/* <Toaster position="bottom-center" /> */}
+        <>{children}</>
+      </body>
     </html>
   );
 }

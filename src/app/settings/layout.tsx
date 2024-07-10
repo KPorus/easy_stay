@@ -3,6 +3,7 @@ import { isMobile } from "@/utils/isMobile";
 import { headers } from "next/headers";
 import MMenu from "@/components/mobile/Menuber/";
 import DMenu from "@/components/desktop/Menuber";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Easy stay --[admins platform]",
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Toaster position="bottom-center" />
         {mobileCheck ? (
           <>
             <MMenu />

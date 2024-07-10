@@ -1,17 +1,19 @@
-"use client";
-
+"use client"
 import styles from "./DLogin.module.scss";
 import Button from "@/sheared/Desktop/Button";
 import Input from "@/sheared/Desktop/Input/Input";
-import { login } from "@/utils/API";
+import { login, register } from "@/utils/API";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-type LoginBody = {
-  hotelName?: string;
-  hotelContact?: string;
+import toast from "react-hot-toast";
+
+type reqBody = {
+  hotelName: string;
+  phoneNo: string;
   email: string;
   pass: string;
 };
+
 const Login = () => {
   const [formState, setFormState] = useState(false);
   const toggleForm = () => {
@@ -19,11 +21,11 @@ const Login = () => {
     setFormState(!formState);
   };
 
-  const [loginBody, setLoginBody] = useState<LoginBody>({
+  const [reqBody, setreqBody] = useState<reqBody>({
+    hotelName: "",
     email: "",
     pass: "",
-    hotelContact: "",
-    hotelName: "",
+    phoneNo: "",
   });
 
   const [data, setData] = useState<any>(null);
@@ -31,23 +33,48 @@ const Login = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     console.log(id, value);
-    setLoginBody((prevState) => ({
+    setreqBody((prevState) => ({
       ...prevState,
       [id]: value,
     }));
   };
 
   const router = useRouter();
-  const handleClick = async () => {
-    console.log(loginBody);
+
+  const handleClick = async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    e.preventDefault();
+    console.log(reqBody.email, reqBody.pass);
     try {
-      const response = await login(loginBody);
-      setData(response);
-      if (response.status && response) {
+      const response = await login({
+        email: reqBody.email,
+        pass: reqBody.pass,
+      });
+      console.log(response);
+      if (response.statusCode === 200) {
+        toast.success(`${response.message}`);
+        localStorage.setItem('id', response.data);
         router.push("/home");
+      } else {
+        toast.error(`${response.message}`);
       }
     } catch (error) {
       console.error("Login failed:", error);
+    }
+  };
+
+  const handleRegisterClick = async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    e.preventDefault();
+    console.log(reqBody);
+    try {
+      const response = await register(reqBody);
+      if (response.statusCode === 200) {
+        toast.success(`${response.message}`);
+        setFormState(!formState);
+      } else {
+        toast.error(`${response.message}`);
+      }
+    } catch (error) {
+      console.error("Registration failed:", error);
     }
   };
 
@@ -58,7 +85,7 @@ const Login = () => {
       ) : (
         <div className={styles.loginTitle}>Login</div>
       )}
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
         {!formState ? (
           <>
             <Input
@@ -94,8 +121,8 @@ const Login = () => {
             <Input
               labelIntent="primary"
               type="text"
-              id="hotelContact"
-              name="hotelContact"
+              id="phoneNo"
+              name="phoneNo"
               placeholder=""
               isRequired
               labelTitle="Enter Hotel Contact number"
@@ -137,7 +164,9 @@ const Login = () => {
           )}
         </span>
         {!formState ? (
-          <Button intent={"primary"} text="Create new account" />
+          <span onClick={handleRegisterClick}>
+            <Button intent={"primary"} text="Create new account" />
+          </span>
         ) : (
           <span onClick={handleClick}>
             <Button intent={"primary"} text="Login" />

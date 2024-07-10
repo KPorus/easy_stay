@@ -8,7 +8,7 @@ import { login } from "@/utils/API";
 import { useRouter } from 'next/navigation'
 type LoginBody = {
   hotelName?:string
-  hotelContact?:string
+  phoneNo?:string
   email: string;
   pass: string;
 };
@@ -23,7 +23,7 @@ const Login = () => {
   const [loginBody, setLoginBody] = useState<LoginBody>({
     email: "",
     pass: "",
-    hotelContact:"",
+    phoneNo:"",
     hotelName: "",
   });
 
@@ -91,8 +91,8 @@ const Login = () => {
             />
             <Input
               type="text"
-              id="hotelContact"
-              name="hotelContact"
+              id="phoneNo"
+              name="phoneNo"
               placeholder=""
               isRequired
               labelTitle="Enter Hotel Contact number"

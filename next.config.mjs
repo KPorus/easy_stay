@@ -7,10 +7,15 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, './src')],
   },
-//   images: {
-//     remotePatterns: [
-//     ],
-//   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**easystayfa.s3.us-east-1.amazonaws.com**",
+      }
+    ],
+  },
+  
 };
 
 

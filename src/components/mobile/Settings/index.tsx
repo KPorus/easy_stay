@@ -1,12 +1,39 @@
 "use client";
 import Image from "next/image";
 import styles from "./settings.module.scss";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Input from "@/sheared/Desktop/Input/Input";
 import Button from "@/sheared/Mobile/Button";
+import { PersonalInfo, UploadBody } from "@/Interface/Isetting";
+import { upload } from "@/utils/API";
+import toast from "react-hot-toast";
 
 const Index = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [image, setImage] = useState<File | null>(null);
+
+  const [uploadBody, setUploadBody] = useState<UploadBody>({
+    address: "",
+    email: "",
+    pass: "",
+    phoneNo: "",
+    hotelName: "",
+    description: "",
+  });
+
+  const [data, setData] = useState<any>(null);
+
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { id, value } = e.target;
+      console.log(id, value);
+      setUploadBody((prevState) => ({
+        ...prevState,
+        [id]: value,
+      }));
+    },
+    []
+  );
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -16,6 +43,27 @@ const Index = () => {
         setSelectedImage(reader.result as string);
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData();
+      const id = localStorage.getItem("id");
+      if (image) {
+        formData.append("image", image);
+        formData.append("id", id as string);
+      }
+      formData.append("data", JSON.stringify(uploadBody));
+
+      // Call the upload function
+      const result = await upload(formData);
+      if (result.statusCode === 200) {
+        toast.success(`${result.message}`);
+        setData(result);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
   return (
