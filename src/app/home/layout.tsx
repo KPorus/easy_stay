@@ -17,8 +17,7 @@ export default function RootLayout({
   const userAgent = headers().get("user-agent") || "";
   const mobileCheck = isMobile(userAgent);
   return (
-    <html lang="en">
-      <body>
+    <>
         {mobileCheck ? (
           <>
             <MMenu />
@@ -30,7 +29,6 @@ export default function RootLayout({
             {children}
           </div>
         )}
-      </body>
-    </html>
+     </>
   );
 }

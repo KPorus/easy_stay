@@ -18,21 +18,19 @@ export default function RootLayout({
   const userAgent = headers().get("user-agent") || "";
   const mobileCheck = isMobile(userAgent);
   return (
-    <html lang="en">
-      <body>
-        <Toaster position="bottom-center" />
-        {mobileCheck ? (
-          <>
-            <MMenu />
-            {children}
-          </>
-        ) : (
-          <div className="desktop_layout">
-            <DMenu />
-            {children}
-          </div>
-        )}
-      </body>
-    </html>
+    <>
+      <Toaster position="bottom-center" />
+      {mobileCheck ? (
+        <>
+          <MMenu />
+          {children}
+        </>
+      ) : (
+        <div className="desktop_layout">
+          <DMenu />
+          {children}
+        </div>
+      )}
+    </>
   );
 }

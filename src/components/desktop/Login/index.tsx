@@ -123,7 +123,7 @@ const Login = () => {
         pass: reqBody.pass,
       });
       if (response.statusCode === 200) {
-        alert(`${response.message}`);
+        // alert(`${response.message}`);
         localStorage.setItem("id", response.data);
         router.push("/home");
         setErrorMessage((prevState) => ({
@@ -131,7 +131,7 @@ const Login = () => {
           server: "",
         }));
       } else {
-        alert(`${response.message}`);
+        // alert(`${response.message}`);
         setErrorMessage((prevState) => ({
           ...prevState,
           server: response.message,
@@ -153,7 +153,7 @@ const Login = () => {
     try {
       const response = await register(reqBody);
       if (response.statusCode === 200) {
-        alert(`${response.message}`);
+        // alert(`${response.message}`);
         setFormState(!formState);
         setErrorMessage((prevState) => ({
           ...prevState,
