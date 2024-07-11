@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import styles from "./DLogin.module.scss";
 import Button from "@/sheared/Desktop/Button";
 import Input from "@/sheared/Desktop/Input/Input";
 import { login, register } from "@/utils/API";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
+// import toast from "react-hot-toast";
 
 type reqBody = {
   hotelName: string;
@@ -14,10 +14,21 @@ type reqBody = {
   pass: string;
 };
 
+type errorBody = {
+  email: string;
+  pass: string;
+  server: string;
+};
+
 const Login = () => {
+  const [isModified, setIsModified] = useState(false);
   const [formState, setFormState] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<errorBody>({
+    email: "",
+    pass: "",
+    server: "",
+  });
   const toggleForm = () => {
-    console.log(formState);
     setFormState(!formState);
   };
 
@@ -28,53 +39,138 @@ const Login = () => {
     phoneNo: "",
   });
 
-  const [data, setData] = useState<any>(null);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    console.log(id, value);
     setreqBody((prevState) => ({
       ...prevState,
       [id]: value,
     }));
+
+    if (id === "email") {
+      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (!emailPattern.test(value)) {
+        setErrorMessage((prevState) => ({
+          ...prevState,
+          email: "Invalid email address",
+        }));
+      } else {
+        setErrorMessage((prevState) => ({
+          ...prevState,
+          email: "",
+        }));
+      }
+    }
+
+    if (id === "pass") {
+      const hasUpperCase = /[A-Z]/.test(value);
+      const hasLowerCase = /[a-z]/.test(value);
+      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+
+      if (value.length < 8) {
+        setErrorMessage((prevState) => ({
+          ...prevState,
+          pass: "Password must be at least 8 characters long",
+        }));
+      } else if (!hasUpperCase) {
+        setErrorMessage((prevState) => ({
+          ...prevState,
+          pass: "Password must contain at least one uppercase letter",
+        }));
+      } else if (!hasLowerCase) {
+        setErrorMessage((prevState) => ({
+          ...prevState,
+          pass: "Password must contain at least one lowercase letter",
+        }));
+      } else if (!hasSpecialChar) {
+        setErrorMessage((prevState) => ({
+          ...prevState,
+          pass: "Password must contain at least one special character",
+        }));
+      } else {
+        setErrorMessage((prevState) => ({
+          ...prevState,
+          pass: "",
+        }));
+      }
+    }
   };
 
   const router = useRouter();
 
-  const handleClick = async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+  useEffect(() => {
+    const { email, pass } = reqBody;
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    const isValidEmail = emailPattern.test(email);
+    const isValidPassword =
+      pass.length >= 8 &&
+      /[A-Z]/.test(pass) &&
+      /[a-z]/.test(pass) &&
+      /[!@#$%^&*(),.?":{}|<>]/.test(pass);
+    if (isValidEmail && isValidPassword) {
+      setIsModified(true);
+    } else {
+      setIsModified(false);
+    }
+  }, [reqBody]);
+
+  const handleClick = async (
+    e: React.MouseEvent<HTMLSpanElement, MouseEvent>
+  ) => {
     e.preventDefault();
-    console.log(reqBody.email, reqBody.pass);
     try {
       const response = await login({
         email: reqBody.email,
         pass: reqBody.pass,
       });
-      console.log(response);
       if (response.statusCode === 200) {
-        toast.success(`${response.message}`);
-        localStorage.setItem('id', response.data);
+        alert(`${response.message}`);
+        localStorage.setItem("id", response.data);
         router.push("/home");
+        setErrorMessage((prevState) => ({
+          ...prevState,
+          server: "",
+        }));
       } else {
-        toast.error(`${response.message}`);
+        alert(`${response.message}`);
+        setErrorMessage((prevState) => ({
+          ...prevState,
+          server: response.message,
+        }));
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Login failed:", error);
+      setErrorMessage((prevState) => ({
+        ...prevState,
+        server: error.message,
+      }));
     }
   };
 
-  const handleRegisterClick = async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+  const handleRegisterClick = async (
+    e: React.MouseEvent<HTMLSpanElement, MouseEvent>
+  ) => {
     e.preventDefault();
-    console.log(reqBody);
     try {
       const response = await register(reqBody);
       if (response.statusCode === 200) {
-        toast.success(`${response.message}`);
+        alert(`${response.message}`);
         setFormState(!formState);
+        setErrorMessage((prevState) => ({
+          ...prevState,
+          server: "",
+        }));
       } else {
-        toast.error(`${response.message}`);
+        setErrorMessage((prevState) => ({
+          ...prevState,
+          server: response.message,
+        }));
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Registration failed:", error);
+      setErrorMessage((prevState) => ({
+        ...prevState,
+        server: error.message,
+      }));
     }
   };
 
@@ -108,6 +204,9 @@ const Login = () => {
               labelTitle="Enter Hotel Email"
               handleChange={handleChange}
             />
+            {errorMessage.email && (
+              <div className={styles.error}>{errorMessage.email}</div>
+            )}
             <Input
               labelIntent="primary"
               type="password"
@@ -118,13 +217,15 @@ const Login = () => {
               labelTitle="Enter Password"
               handleChange={handleChange}
             />
+            {errorMessage.pass && (
+              <div className={styles.error}>{errorMessage.pass}</div>
+            )}
             <Input
               labelIntent="primary"
               type="text"
               id="phoneNo"
               name="phoneNo"
               placeholder=""
-              isRequired
               labelTitle="Enter Hotel Contact number"
               handleChange={handleChange}
             />
@@ -141,6 +242,9 @@ const Login = () => {
               labelTitle="Enter Hotel Email"
               handleChange={handleChange}
             />
+            {errorMessage.email && (
+              <div className={styles.error}>{errorMessage.email}</div>
+            )}
             <Input
               labelIntent="primary"
               type="password"
@@ -151,6 +255,9 @@ const Login = () => {
               labelTitle="Enter Password"
               handleChange={handleChange}
             />
+            {errorMessage.pass && (
+              <div className={styles.error}>{errorMessage.pass}</div>
+            )}
           </>
         )}
         <span onClick={toggleForm}>
@@ -163,13 +270,20 @@ const Login = () => {
             <Button intent={"secondary"} text="Create new account" />
           )}
         </span>
+        {errorMessage.server && (
+              <div className={styles.error}>{errorMessage.server}</div>
+            )}
         {!formState ? (
           <span onClick={handleRegisterClick}>
-            <Button intent={"primary"} text="Create new account" />
+            <Button
+              intent={"primary"}
+              text="Create new account"
+              disabled={!isModified}
+            />
           </span>
         ) : (
           <span onClick={handleClick}>
-            <Button intent={"primary"} text="Login" />
+            <Button intent={"primary"} text="Login" disabled={!isModified} />
           </span>
         )}
       </form>

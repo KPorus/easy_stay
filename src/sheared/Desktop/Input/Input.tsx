@@ -64,7 +64,7 @@ const Input = ({
         value={value}
         className={inputBody({ inputIntent, focus: false })}
         placeholder={placeholder ? placeholder : ""}
-        required={isRequired}
+        required={isRequired ? true : false}
         onChange={handleChange}
       />
       <label htmlFor={id} className={labelBody({ labelIntent })}>
