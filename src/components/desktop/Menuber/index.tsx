@@ -9,9 +9,7 @@ const index = () => {
         src={logo}
         alt="logo"
         className={styles.menuLogo}
-        style={{
-         
-        }}
+        priority
         width={100}
         height={100}
       />

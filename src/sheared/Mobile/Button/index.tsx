@@ -6,6 +6,7 @@ const buttonStyles = cva(`${styles.btnContainer}`, {
       primary: `${styles.primary}`,
       secondary: `${styles.secondary}`,
       third: `${styles.third}`,
+      forth: `${styles.forth}`,
     },
     disabled: {
       true: `${styles.disabled}`,

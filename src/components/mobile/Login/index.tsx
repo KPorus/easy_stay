@@ -5,6 +5,7 @@ import Input from "@/sheared/Mobile/Input/Input";
 import { login, register } from "@/utils/API";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 // import toast from "react-hot-toast";
 
 type reqBody = {
@@ -123,7 +124,7 @@ const Login = () => {
         pass: reqBody.pass,
       });
       if (response.statusCode === 200) {
-        alert(`${response.message}`);
+        toast.success(`${response.message}`);
         localStorage.setItem("id", response.data);
         router.push("/home");
         setErrorMessage((prevState) => ({
@@ -131,7 +132,7 @@ const Login = () => {
           server: "",
         }));
       } else {
-        alert(`${response.message}`);
+        toast.error(`${response.message}`);
         setErrorMessage((prevState) => ({
           ...prevState,
           server: response.message,
@@ -153,7 +154,7 @@ const Login = () => {
     try {
       const response = await register(reqBody);
       if (response.statusCode === 200) {
-        alert(`${response.message}`);
+        toast.success(`${response.message}`);
         setFormState(!formState);
         setErrorMessage((prevState) => ({
           ...prevState,
@@ -264,11 +265,11 @@ const Login = () => {
         <span onClick={toggleForm}>
           {!formState ? (
             <Button
-              intent={"primary"}
+              intent={"forth"}
               text="Already have an account! Login"
             />
           ) : (
-            <Button intent={"primary"} text="Create new account" />
+            <Button intent={"forth"} text="Create new account" />
           )}
         </span>
         {errorMessage.server && (
@@ -277,14 +278,14 @@ const Login = () => {
         {!formState ? (
           <span onClick={handleRegisterClick}>
             <Button
-              intent={"primary"}
+              intent={"third"}
               text="Create new account"
               disabled={!isModified}
             />
           </span>
         ) : (
           <span onClick={handleClick}>
-            <Button intent={"primary"} text="Login" disabled={!isModified} />
+            <Button intent={"third"} text="Login" disabled={!isModified} />
           </span>
         )}
       </form>

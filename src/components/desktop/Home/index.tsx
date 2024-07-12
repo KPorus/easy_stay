@@ -45,20 +45,30 @@ const Home = () => {
       <h1 className="font-black text-[18px] text-[#071952] uppercase pb-4">
         Welcome {data.hotelName}
       </h1>
-      <div>
-        {data.hotelLogo && (
+      <div className={styles.profileInfo}>
+        {data.hotelLogo ? (
           <Image
             src={data.hotelLogo}
             alt={"hotel logo"}
             width={200}
             height={200}
+            priority
+            quality={75} 
             style={{
               borderRadius: "50%",
               objectFit: "cover",
               marginBottom: "20px",
             }}
           />
+        ) : (
+          <div className={styles.avatar}>No Image</div>
         )}
+
+        <div>
+          <h1>Hotel Name: {data.hotelName}</h1>
+          <h2>Email: {data.email}</h2>
+          <h3>Phone no: {data.phoneNo}</h3>
+        </div>
       </div>
     </div>
   );

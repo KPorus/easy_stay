@@ -1,5 +1,24 @@
 .homeContainer {
-    width: 88%;
-    padding: 3%;
+  width: 88%;
+  padding: 3%;
+
+  .avatar {
+    width: 200px;
+    height: 200px;
+    background: rgb(245, 245, 245);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #5d5a5a;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
   }
-  
+
+  .profileInfo{
+    @apply flex justify-center items-center; 
+  }
+}

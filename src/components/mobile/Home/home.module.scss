@@ -1,0 +1,38 @@
+.homeContainer {
+  padding: 3%;
+
+  .avatar {
+    width: 200px;
+    height: 200px;
+    background: rgb(245, 245, 245);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #5d5a5a;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+  }
+
+  .profileInfo {
+    @apply flex flex-col items-center;
+
+    .profileImage {
+      filter: drop-shadow(4px 5px 1px #071952);
+      -webkit-filter: drop-shadow(4px 5px 1px #071952);
+    }
+
+    .profileText {
+        top: -1px;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 34px;
+        padding-bottom: 34px;
+    }
+  }
+}

@@ -11,7 +11,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**easystayfa.s3.us-east-1.amazonaws.com**",
+        hostname: "**easystayfa.s3.amazonaws.com**",
       }
     ],
   },
