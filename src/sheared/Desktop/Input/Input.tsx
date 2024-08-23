@@ -32,11 +32,12 @@ const labelBody = cva(styles.labelBody, {
 });
 
 interface IInputType extends VariantProps<typeof labelBody & typeof inputBody> {
+  key?:string,
   type: string;
   id: string;
   name: string;
   value?:string
-  placeholder: string;
+  placeholder?: string;
   isRequired?: boolean;
   labelTitle: string;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;

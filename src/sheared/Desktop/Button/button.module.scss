@@ -24,7 +24,7 @@
     font-weight: 400;
 }
 
-.thrid {
+.third {
     margin: auto;
     width: 30%;
     margin-top: 2rem;
@@ -42,7 +42,7 @@
     font-weight: 700;
 }
 
-.fifth{
+.fifth {
     padding: 8px;
     background-color: #e6e4e4;
     color: #071952;
@@ -50,6 +50,31 @@
     font-weight: 700;
 }
 
+
+.sixth {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    background-color: #071952;
+    padding: 6.5px 50px;
+    border-radius: 2rem;
+}
+
+.seventh{
+    @apply w-1/2 px-4 h-[44px] ml-2 rounded-md shadow-sm transition-transform duration-100 ease-in hover:-translate-y-0.5;
+    background-color: #071952;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: .125rem;
+}
+
+.eighth {
+    @apply w-1/2 px-4 h-[44px] mr-2 bg-neutral-50 border border-neutral-400 rounded-md shadow-sm transition-transform duration-100 ease-in hover:bg-neutral-100 hover:-translate-y-0.5;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .125rem;
+}
 
 .disabled {
     opacity: 0.6;

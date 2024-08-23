@@ -276,7 +276,9 @@ const Login = () => {
               <div className={styles.error}>{errorMessage.server}</div>
             )}
         {!formState ? (
-          <span onClick={handleRegisterClick}>
+          <span onClick={handleRegisterClick} style={{
+            paddingBottom:"32px"
+          }}>
             <Button
               intent={"third"}
               text="Create new account"
@@ -284,7 +286,9 @@ const Login = () => {
             />
           </span>
         ) : (
-          <span onClick={handleClick}>
+          <span onClick={handleClick} style={{
+            paddingBottom:"32px"
+          }}>
             <Button intent={"third"} text="Login" disabled={!isModified} />
           </span>
         )}

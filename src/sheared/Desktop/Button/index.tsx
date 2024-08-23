@@ -6,9 +6,12 @@ const buttonStyles = cva(`${styles.btnContainer}`, {
     intent: {
       primary: `${styles.primary}`,
       secondary: `${styles.secondary}`,
-      thrid: `${styles.thrid}`,
+      third: `${styles.third}`,
       fourth: `${styles.fourth}`,
       fifth: `${styles.fifth}`,
+      sixth: `${styles.sixth}`,
+      seventh: `${styles.seventh}`,
+      eighth: `${styles.eighth}`,
     },
     disabled: {
       true: `${styles.disabled}`,
@@ -23,15 +26,23 @@ const buttonStyles = cva(`${styles.btnContainer}`, {
 
 interface ButtonProps extends VariantProps<typeof buttonStyles> {
   text: string;
+  type?: "button" | "submit" | "reset";
   disabled?: boolean;
 }
 
-export default function Button({ intent, text, disabled, ...props }: ButtonProps) {
+export default function Button({
+  intent,
+  text,
+  type = "button",
+  disabled,
+  ...props
+}: ButtonProps) {
   return (
     <button
       id="ts--button"
       className={buttonStyles({ intent, disabled })}
       disabled={disabled}
+      type={type}
       {...props}
     >
       {text}

@@ -1,10 +1,8 @@
-import React from 'react';
+import Products from '@/components/MainPages/Products';
 
 const page = () => {
     return (
-        <div>
-            product
-        </div>
+        <Products />
     );
 };
 

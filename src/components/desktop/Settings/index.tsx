@@ -213,18 +213,6 @@ const Index = () => {
               handleChange={handleChange}
             />
             <Input
-              type="text"
-              id="address"
-              name="address"
-              value={uploadBody.address}
-              placeholder=""
-              isRequired
-              labelTitle="Enter Hotel Address"
-              labelIntent="secondary"
-              inputIntent="secondary"
-              handleChange={handleChange}
-            />
-            <Input
               type="password"
               id="setPassword"
               name="setPassword"
@@ -246,6 +234,18 @@ const Index = () => {
               inputIntent="secondary"
               handleChange={handleChange}
             />
+          <Input
+            type="text"
+            id="address"
+            name="address"
+            value={uploadBody.address}
+            placeholder=""
+            isRequired
+            labelTitle="Enter Hotel Address"
+            labelIntent="secondary"
+            inputIntent="secondary"
+            handleChange={handleChange}
+          />
           </div>
         </div>
         <div className={styles.settingBodyPartTwo}>
@@ -258,7 +258,7 @@ const Index = () => {
           />
         </div>
         <span onClick={handleSubmit}>
-          <Button text="Submit" intent="thrid" disabled={!isModified} />
+          <Button text="Submit" intent="third" disabled={!isModified} />
         </span>
       </form>
       {isActive && (
